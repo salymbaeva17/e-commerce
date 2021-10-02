@@ -1,5 +1,6 @@
 import React from 'react'
 import {useDispatch, useSelector} from "react-redux"
+import {ADD_TO_CART, DECREASE_QUANTITY, REMOVE_FROM_CART} from "../../redux/actions";
 
 const Cart = () => {
     const dispatch = useDispatch()
@@ -22,26 +23,23 @@ const Cart = () => {
                             </thead>
                             <tbody>
                             {
-                                cart.map((item, idx) =>
+                                cart.map((product, idx) =>
                                     <tr>
                                         <th scope="row">{idx + 1}</th>
-                                        <td>{item.title}</td>
-                                        <td>{item.price}$</td>
+                                        <td>{product.title}</td>
+                                        <td>{product.price}$</td>
                                         <td>
                                             <div className="d-flex align-items-center justify-content-between w-50">
-                                                <button className="me-2 btn btn-sm btn-light border" onClick={() => dispatch({type: "DECREMENT_PRODUCT_QUANTITY", payload: item})}>-</button>
-                                                <span>{item.quantity}</span>
-                                                <button className="ms-2 btn btn-sm btn-light border" onClick={() => dispatch({type: "ADD_TO_CART", payload: item})}>+</button>
+                                                <button className="me-2 btn btn-sm btn-light border" onClick={() => dispatch(DECREASE_QUANTITY(idx))}>-</button>
+                                                <span>{product.quantity}</span>
+                                                <button className="ms-2 btn btn-sm btn-light border" onClick={() => dispatch(ADD_TO_CART(product))}>+</button>
                                             </div>
                                         </td>
-                                        <td>{(item.price*item.quantity).toFixed(2)}$</td>
+                                        <td>{(product.price*product.quantity).toFixed(2)}$</td>
                                         <td>
 
                                             <button className="btn btn-sm btn-danger fw-bolder"
-                                                    onClick={() => dispatch({
-                                                        type: "REMOVE_FROM_CART",
-                                                        payload: item.id
-                                                    })}>
+                                                    onClick={() => dispatch(REMOVE_FROM_CART(product.id))}>
                                                 Удалить
                                             </button>
                                         </td>
@@ -57,7 +55,7 @@ const Cart = () => {
                             ).toFixed(2)
                         }$</span></p>
                     </>
-                    : <p className="text-center fw-700">Корзина пуста, добавьте товар</p>
+                    : <p className="text-center fw-bold mt-3">Корзина пуста, добавьте товар</p>
             }
         </div>
     );
