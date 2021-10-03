@@ -30,12 +30,16 @@ const Cart = () => {
                                         <td>{product.price}$</td>
                                         <td>
                                             <div className="d-flex align-items-center justify-content-between w-50">
-                                                <button className="me-2 btn btn-sm btn-light border" onClick={() => dispatch(DECREASE_QUANTITY(idx))}>-</button>
+                                                <button className="me-2 btn btn-sm btn-light border"
+                                                        onClick={() => dispatch(DECREASE_QUANTITY(idx))}>-
+                                                </button>
                                                 <span>{product.quantity}</span>
-                                                <button className="ms-2 btn btn-sm btn-light border" onClick={() => dispatch(ADD_TO_CART(product))}>+</button>
+                                                <button className="ms-2 btn btn-sm btn-light border"
+                                                        onClick={() => dispatch(ADD_TO_CART(product))}>+
+                                                </button>
                                             </div>
                                         </td>
-                                        <td>{(product.price*product.quantity).toFixed(2)}$</td>
+                                        <td>{(product.price * product.quantity).toFixed(2)}$</td>
                                         <td>
 
                                             <button className="btn btn-sm btn-danger fw-bolder"
